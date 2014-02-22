@@ -8,33 +8,33 @@ package emergencyroom;
  *
  * @author Dell
  */
-public class LinkedQuack<T> {
+public class LinkedQuack {
 
-    private Node front; //The first object in the quack
-    private Node back; //The last object in the quack
+    private PatientNode front; //The first patient in the quack
+    private PatientNode back; //The last patient in the quack
 
-    private class Node {
+    private class PatientNode {
 
-        private final T object;
-        private Node next;
+        private final Patient patient;
+        private PatientNode next;
 
-        private Node(T newObject) {
-            object = newObject;
+        private PatientNode(Patient newPatient) {
+            patient = newPatient;
             next = null;
-        } //private Node(T newObject)
+        } //private PatientNode(Patient newPatient)
 
-        private T getObject() {
-            return object;
-        } //private T getObject()
+        private Patient getPatient() {
+            return patient;
+        } //private Patient getPatient()
 
-        private Node getNext() {
+        private PatientNode getNext() {
             return next;
-        } //private Node getNext()
+        } //private PatientNode getNext()
 
-        private void setNext(Node nextObject) {
-            next = nextObject;
-        } //private void setNext(Node nextObject)
-    } //private class Node
+        private void setNext(PatientNode nextPatient) {
+            next = nextPatient;
+        } //private void setNext(PatientNode nextPatient)
+    } //private class PatientNode
 
     // Constructs a LinkedQuack
     public LinkedQuack() {
@@ -42,9 +42,9 @@ public class LinkedQuack<T> {
         back = null;
     } //public LinkedQuack()
 
-    // Puts an object at the back of the quack.
-    public void enqueue(T object) {
-        Node temp = new Node(object);
+    // Puts a patient at the back of the quack.
+    public void enqueue(Patient patient) {
+        PatientNode temp = new PatientNode(patient);
         if (isEmpty()) {
             front = temp;
             back = temp;
@@ -52,24 +52,24 @@ public class LinkedQuack<T> {
             back.setNext(temp);
             back = temp;
         } //if (isEmpty())
-    } //public void enqueue(T object)
+    } //public void enqueue(Patient patient)
 
     /*
-     * Returns the first object in the quack. Throws a NullPointerException if
+     * Returns the first patient in the quack. Throws a NullPointerException if
      * the quack is empty.
      */
-    public T dequeue() throws NullPointerException {
+    public Patient dequeue() throws NullPointerException {
         if (isEmpty()) {
             throw new NullPointerException("The quack is empty.");
         } //if (isEmpty())
-        T next = front.getObject();
+        Patient next = front.getPatient();
         front = front.getNext();
         return next;
-    } //public T dequeue() throws NullPointerException
+    } //public Patient dequeue() throws NullPointerException
 
-    // Puts an object at the front of the quack.
-    public void push(T object) {
-        Node temp = new Node(object);
+    // Puts a patient at the front of the quack.
+    public void push(Patient patient) {
+        PatientNode temp = new PatientNode(patient);
         if (isEmpty()) {
             front = temp;
             back = temp;
@@ -77,19 +77,19 @@ public class LinkedQuack<T> {
             temp.setNext(front);
             front = temp;
         } //if (isEmpty())
-    } //public void push(T object)
+    } //public void push(Patient patient)
 
     // Returns whether the quack is empty.
     public boolean isEmpty() {
         return (front == null);
     } //public boolean isEmpty()
 
-    // Prints out all the objects in the quack in order, front to back.
+    // Prints out all the patients in the quack in order, front to back.
     public void print() {
-        Node temp = front;
+        PatientNode temp = front;
         while (temp != null) {
-            System.out.println(temp.getObject().toString());
+            temp.getPatient().print();
             temp = temp.getNext();
         } //while (temp != null)
     } //public void print()
-} //public class LinkedQuack<T>
+} //public class LinkedQuack

@@ -13,7 +13,7 @@ public class EmergencyRoom {
     private int numERRooms; //Number of ER rooms
     private int numLinkedQuacks; //Number of priority quacks
     private ERRoom[] erRooms; //Array of ER rooms
-    private LinkedQuack<Patient>[] waiting; //Array of priority quacks of waiting patients
+    private LinkedQuack[] waiting; //Array of priority quacks of waiting patients
 
     // Constructs an EmergencyRoom with default parameters
     public EmergencyRoom() {
@@ -48,9 +48,9 @@ public class EmergencyRoom {
      * patient is placed in the ER room. If an ER room is occupied by a patient
      * of lower priority than the incoming patient, the incoming patient is
      * placed in the ER room with the lowest priority patient and the occupying
-     * patient is put at the front of his priority quack. If all the ER rooms
-     * are occupied by patients of higher priority, the incoming patient is put
-     * at the back of his priority quack.
+     * patient is put at the front of his priority quack. If all the ER
+     * rooms are occupied by patients of higher priority, the incoming patient
+     * is put at the back of his priority quack.
      */
     public void process(Patient incoming) {
         int lowestPriority = 0, lowestPriorityRoom = 0;

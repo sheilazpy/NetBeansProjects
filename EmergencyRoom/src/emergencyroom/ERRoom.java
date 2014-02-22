@@ -48,7 +48,7 @@ public class ERRoom {
     public void print() {
         if (occupied) {
             System.out.println("Occupied");
-            System.out.println(inRoom.toString());
+            inRoom.print();
         } else {
             System.out.println("Empty");
         } //if (occupied)
