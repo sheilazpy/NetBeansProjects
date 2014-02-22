@@ -29,8 +29,7 @@ public class Patient {
     } //public int getPriority()
 
     // Prints out the patient's ID number and priority
-    public void print() {
-        System.out.println("\nPatient ID: " + patientID);
-        System.out.println("Patient Priority: " + patientPriority);
+    public String toString() {
+        return "\nPatient ID: " + patientID + "\nPatient Priority: " + patientPriority;
     } //public void print()
 } //public class Patient

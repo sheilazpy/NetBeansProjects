@@ -36,14 +36,7 @@ public class Main {
                 System.out.println("The number of patient priority categories must be a positive number.");
             } //if (numPriorities < 1)
         } while (numPriorities < 1);
-        do {
-            System.out.print("Enter the maximum capacity of the waiting lists:  ");
-            size = keyboard.nextInt();
-            if (size < 1) {
-                System.out.println("The capacity of the waiting lists must be a positive number.");
-            } //if (size < 1)
-        } while (size < 1);
-        er = new EmergencyRoom(rooms, numPriorities, size);
+        er = new EmergencyRoom(rooms, numPriorities);
         while (!done) {
             System.out.println("\nChoose an option:");
             System.out.println("1 = Enter a new patient ID number and priority");
@@ -59,29 +52,24 @@ public class Main {
                     do {
                         System.out.print("Enter the patient's priority:  ");
                         priority = keyboard.nextInt();
-                        if (priority < 1 || priority > 4) {
-                            System.out.println("The patient's priority must be between 1 and "+numPriorities);
+                        if (priority < 1 || priority > numPriorities) {
+                            System.out.println("The patient's priority must be between 1 and " + numPriorities);
                         } //if (priority < 1 || priority > 4)
-                    } while (priority < 1 || priority > 4);
-                    try {
-                        er.process(new Patient(id, priority)); //Process the incoming patient
-                        System.out.println("\nPatient " + id + " has been added.");
-                    } catch (StackOverflowError error) {
-                        System.out.println("\nPatient " + id + " could not be added.");
-                        System.out.println("The priority " + priority + " waiting list is full.");
-                    } //catch (StackOverflowError error)
+                    } while (priority < 1 || priority > numPriorities);
+                    er.process(new Patient(id, priority)); //Process the incoming patient
+                    System.out.println("\nPatient " + id + " has been added.");
                     if (printStatus) {
                         er.print();
                     } //if (printStatus)
                     break;
                 case 2: //Release patient from ER room
                     do {
-                    System.out.print("\nEnter the room number to be released:  ");
-                    numRoom = keyboard.nextInt();
-                    if(numRoom<1||numRoom>rooms){
-                        System.out.println("The room number must be between 1 and "+rooms);
-                    }
-                    } while(numRoom<1||numRoom>rooms);
+                        System.out.print("\nEnter the room number to be released:  ");
+                        numRoom = keyboard.nextInt();
+                        if (numRoom < 1 || numRoom > rooms) {
+                            System.out.println("The room number must be between 1 and " + rooms);
+                        }
+                    } while (numRoom < 1 || numRoom > rooms);
                     Patient patient = er.release(numRoom);
                     if (patient == null) {
                         System.out.println("\nCould not release a patient. The ER room is empty");
